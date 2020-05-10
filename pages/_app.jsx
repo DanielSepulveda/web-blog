@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import '../styles/index.css';
+import React from 'react'
+import '../styles/index.css'
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} />
 }
 
-export default MyApp;
+export default MyApp
