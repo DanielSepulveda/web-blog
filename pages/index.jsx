@@ -1,53 +1,64 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable global-require */
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
-import SearchIcon from '../assets/svg/icon-search.svg'
+import Layout, { Container } from 'components/layout'
+import covidImg from 'public/static/images/covid.jpg'
+import studyingImg from 'public/static/images/studying.jpg'
 
-export default function Home() {
+const Home = () => {
   return (
-    <div>
+    <Layout>
       <Head>
-        <title>Blogging</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Blogging - Home</title>
       </Head>
-
-      <header>
-        <div className="container mx-auto px-8 text-center h-24 flex justify-center items-center">
-          <h1 className="text-3xl tracking-wider font-thin uppercase">Blogging</h1>
-        </div>
-        <div className="container mx-auto px-8">
-          <div className="border-t border-b border-black">
-            <div className="flex h-12 px-8">
-              <div className="flex-1">
-                <ul className="flex h-full text-xs font-bold tracking-wider uppercase">
-                  <li>
-                    <div className="flex h-full justify-center items-center">
-                      <Link href="/">
-                        <a className="hover:text-gray-700">Home</a>
-                      </Link>
-                    </div>
-                  </li>
-                  <li className="ml-8">
-                    <div className="flex h-full justify-center items-center">
-                      <Link href="/">
-                        <a className="hover:text-gray-700">About Us</a>
-                      </Link>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="flex justify-center items-center cursor-pointer">
-                <SearchIcon />
-              </div>
+      <Container>
+        <div className="flex">
+          <div className="max-w-sm rounded overflow-hidden shadow-lg">
+            <img height="747" className="w-full" src={covidImg} alt="Sunset in the mountains" />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <p className="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                perferendis eaque, exercitationem praesentium nihil.
+              </p>
+            </div>
+            <div className="px-6 py-4">
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                #photography
+              </span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                #travel
+              </span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                #winter
+              </span>
             </div>
           </div>
-          {/* <nav className="border-t border-b border-black">
-          </nav> */}
+          <div className="max-w-sm rounded overflow-hidden shadow-lg">
+            <img height="747" className="w-full" src={studyingImg} alt="Sunset in the mountains" />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <p className="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                perferendis eaque, exercitationem praesentium nihil.
+              </p>
+            </div>
+            <div className="px-6 py-4">
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                #photography
+              </span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                #travel
+              </span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                #winter
+              </span>
+            </div>
+          </div>
         </div>
-      </header>
-
-      <main></main>
-    </div>
+      </Container>
+    </Layout>
   )
 }
+
+export default Home

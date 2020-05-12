@@ -1,17 +1,13 @@
 /* eslint-disable no-param-reassign */
 require('dotenv').config()
+const withPlugins = require('next-compose-plugins')
+const optimizedImages = require('next-optimized-images')
 
-module.exports = {
-  env: {},
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: ['@svgr/webpack'],
-    })
-
-    return config
-  },
-}
+module.exports = withPlugins([
+  [
+    optimizedImages,
+    {
+      handleImages: ['jpeg', 'png', 'svg', 'webp', 'gif', 'jpg'],
+    },
+  ],
+])
