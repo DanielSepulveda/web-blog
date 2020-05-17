@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "DATOCMS_API_TOKEN": "@datocms_api_token"
+    }
+  }
+}
