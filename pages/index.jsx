@@ -2,6 +2,7 @@
 /* eslint-disable global-require */
 import React from 'react'
 import request from 'lib/datocms'
+import fetch from 'isomorphic-unfetch'
 import { renderMetaTags } from 'react-datocms'
 import Head from 'next/head'
 import Layout, { Container } from 'components/layout'
@@ -57,16 +58,18 @@ export async function getStaticProps() {
     query: HOMEPAGE_QUERY,
     variables: { limit: 10 },
   })
-
+  const res = await fetch('http://localhost:3000/api/posts')
+  const test = await res.json()
   return {
     props: {
       data,
+      test,
     },
   }
 }
-const Home = ({ data }) => {
+const Home = ({ data, test }) => {
   const { allPosts } = data
-
+  console.log(test)
   return (
     <Layout>
       <Head>
