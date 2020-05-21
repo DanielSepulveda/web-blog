@@ -38,8 +38,6 @@ const HitCard = ({ hit }) => {
     return <div>Loading...</div>
   }
 
-  console.log(hit)
-
   const { post } = data
 
   return (
