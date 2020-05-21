@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import { InstantSearch, Configure } from 'react-instantsearch-dom'
 import algoliasearch from 'algoliasearch/lite'

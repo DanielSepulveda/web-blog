@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable global-require */
 import React from 'react'
-import request from 'lib/datocms'
+import datoAPI from 'lib/datocms'
 import { renderMetaTags } from 'react-datocms'
 import Head from 'next/head'
 import Layout, { Container } from 'components/layout'
@@ -28,6 +26,7 @@ query HomePage($limit: IntType) {
     title
     excerpt
     date
+    slug
     author {
       name
     }
@@ -53,8 +52,7 @@ query HomePage($limit: IntType) {
 }`
 
 export async function getStaticProps() {
-  const data = await request({
-    query: HOMEPAGE_QUERY,
+  const data = await datoAPI(HOMEPAGE_QUERY, {
     variables: { limit: 10 },
   })
   return {
@@ -75,7 +73,9 @@ const Home = ({ data }) => {
       <Container>
         <div className="flex flex-wrap -mx-2 blogPosts-container">
           {allPosts.map((blogPost) => (
-            <PostCard key={blogPost.id} {...blogPost} />
+            <article className="px-2 w-1/3" key={blogPost.id}>
+              <PostCard {...blogPost} />
+            </article>
           ))}
         </div>
       </Container>

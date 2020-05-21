@@ -1,9 +1,4 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/jsx-closing-tag-location */
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connectPoweredBy, connectStats, connectStateResults } from 'react-instantsearch-dom'
 
 const Info = ({ url, processingTimeMS, nbHits, searchState }) => {
@@ -57,13 +52,6 @@ const Info = ({ url, processingTimeMS, nbHits, searchState }) => {
       </div>
     </div>
   )
-}
-
-Info.propTypes = {
-  url: PropTypes.string.isRequired,
-  processingTimeMS: PropTypes.number.isRequired,
-  nbHits: PropTypes.number.isRequired,
-  searchState: PropTypes.any.isRequired,
 }
 
 export default connectStateResults(connectStats(connectPoweredBy(Info)))

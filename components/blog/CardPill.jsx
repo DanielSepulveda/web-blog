@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const CardPill = ({ name }) => {
   return (
@@ -7,10 +6,6 @@ const CardPill = ({ name }) => {
       {`#${name}`}
     </span>
   )
-}
-
-CardPill.propTypes = {
-  name: PropTypes.string.isRequired,
 }
 
 export default CardPill
