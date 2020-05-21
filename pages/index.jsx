@@ -64,6 +64,7 @@ export async function getStaticProps() {
     },
   }
 }
+
 const Home = ({ data }) => {
   const { allPosts } = data
 
@@ -74,7 +75,7 @@ const Home = ({ data }) => {
         <title>Blogging - Home</title>
       </Head>
       <Container>
-        <div className="flex flex-wrap -mx-2">
+        <div className="flex flex-wrap -mx-2 blogPosts-container">
           {allPosts.map((blogPost) => (
             <PostCard key={blogPost.id} {...blogPost} />
           ))}

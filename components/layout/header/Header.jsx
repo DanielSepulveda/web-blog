@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import PropTypes from 'prop-types'
 import Link from 'next/link'
 import SearchIcon from 'public/static/svg/icon-search.svg'
 import Container from '../container'
 
-const Header = () => {
+const Header = ({ openSearch }) => {
   return (
     <header>
       <Container>
@@ -35,7 +38,7 @@ const Header = () => {
             </div>
             <div className="flex-initial ml-12 flex justify-end">
               <div className="cursor-pointer">
-                <img src={SearchIcon} alt="Search Icon" />
+                <img src={SearchIcon} alt="Search Icon" onClick={openSearch} />
               </div>
             </div>
           </div>
@@ -43,6 +46,10 @@ const Header = () => {
       </Container>
     </header>
   )
+}
+
+Header.propTypes = {
+  openSearch: PropTypes.func.isRequired,
 }
 
 export default Header
