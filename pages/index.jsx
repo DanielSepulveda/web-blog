@@ -57,7 +57,6 @@ export async function getStaticProps() {
     query: HOMEPAGE_QUERY,
     variables: { limit: 10 },
   })
-
   return {
     props: {
       data,
@@ -67,7 +66,6 @@ export async function getStaticProps() {
 
 const Home = ({ data }) => {
   const { allPosts } = data
-
   return (
     <Layout>
       <Head>
