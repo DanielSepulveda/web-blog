@@ -15,9 +15,9 @@ module.exports = withPlugins(
   {
     env: {
       DATOCMS_API_TOKEN: process.env.DATOCMS_API_TOKEN,
-      MONGODB_URI: 'mongodb+srv://blog-user:123123123@cluster0-jmuao.mongodb.net/blog?retryWrites=true&w=majority',
-      DB_NAME: 'blog',
-      WEB_URI: 'https://web-blog-git-auth.danielgsepulvedaa.now.sh/',
+      MONGODB_URI: process.env.MONGODB_URI,
+      DB_NAME: process.env.DB_NAME,
+      WEB_URI: process.env.WEB_URI,
     },
   }
 )
