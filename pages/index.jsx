@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 /* eslint-disable global-require */
 import React from 'react'
@@ -6,6 +7,7 @@ import { renderMetaTags } from 'react-datocms'
 import Head from 'next/head'
 import Layout, { Container } from 'components/layout'
 import PostCard from 'components/blog/PostCard'
+import { useCurrentUser } from '../lib/hooks'
 
 const HOMEPAGE_QUERY = `
 query HomePage($limit: IntType) {
@@ -66,6 +68,7 @@ export async function getStaticProps() {
 
 const Home = ({ data }) => {
   const { allPosts } = data
+  const [user] = useCurrentUser()
   return (
     <Layout>
       <Head>
@@ -73,6 +76,7 @@ const Home = ({ data }) => {
         <title>Blogging - Home</title>
       </Head>
       <Container>
+        <h2>Hello, {user ? user.name : 'stranger'}!</h2>
         <div className="flex flex-wrap -mx-2 blogPosts-container">
           {allPosts.map((blogPost) => (
             <PostCard key={blogPost.id} {...blogPost} />
