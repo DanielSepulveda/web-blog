@@ -23,6 +23,13 @@ const Header = ({ openSearch }) => {
                     </Link>
                   </div>
                 </li>
+                <li>
+                  <div className="flex h-full justify-center items-center">
+                    <Link href="/login">
+                      <a className="hover:text-gray-700">Sign In</a>
+                    </Link>
+                  </div>
+                </li>
                 {/* <li className="ml-8">
                   <div className="flex h-full justify-center items-center">
                     <Link href="/">

@@ -10,10 +10,10 @@ const LoginPage = () => {
   const router = useRouter()
   const [errorMsg, setErrorMsg] = useState('')
   const [user, { mutate }] = useCurrentUser()
-  // useEffect(() => {
-  //   // redirect to home if user is authenticated
-  //   if (user) router.push('/')
-  // }, [user])
+  useEffect(() => {
+    // redirect to home if user is authenticated
+    if (user) router.push('/')
+  }, [user])
 
   const handleSubmit = async (values, formik) => {
     try {
@@ -78,10 +78,10 @@ const LoginPage = () => {
                     placeholder="Contraseña"
                     type="password"
                   />
-                    {errors.password && touched.password ? (
-                      <div>{errors.password}</div>
-                    ) : null}
                 </div>
+                {errors.password && touched.password ? (
+                  <div>{errors.password}</div>
+                ) : null}
                 <div className="flex justify-center">
                   {isValid ? 
                     <button 
