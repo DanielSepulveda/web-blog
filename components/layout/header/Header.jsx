@@ -1,8 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import SearchIcon from 'public/static/svg/icon-search.svg'
 import Container from '../container'
@@ -15,7 +11,7 @@ const Header = ({ openSearch }) => {
           <div className="flex h-24 items-center border-b border-black">
             <div className="flex-initial mr-12">
               <Link href="/">
-                <a className="text-2xl tracking-wider font-thin uppercase">Blogging</a>
+                <a className="text-2xl tracking-wider font-thin uppercase">Blogging.</a>
               </Link>
             </div>
             <div className="flex-1">
@@ -46,10 +42,6 @@ const Header = ({ openSearch }) => {
       </Container>
     </header>
   )
-}
-
-Header.propTypes = {
-  openSearch: PropTypes.func.isRequired,
 }
 
 export default Header
