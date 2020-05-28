@@ -16,7 +16,7 @@ module.exports = withPlugins(
     env: {
       MONGO_DB_URL:
         'mongodb+srv://admin:123456adminBlog@blogging-lea0y.mongodb.net/bloggingdb?retryWrites=true&w=majority',
-      DATOCMS_API_TOKEN: '328da546216e601506821c482008e4'
+        DATOCMS_API_TOKEN: '328da546216e601506821c482008e4'
     },
   }
 )
