@@ -117,8 +117,6 @@ export async function getStaticProps({ params }) {
   const data = await datoAPI(GET_POST_BY_SLUG, { variables: { slug: params.slug } })
   const content = await markdownToHtml(data?.post?.content || '')
 
-  console.log(data)
-
   return {
     props: {
       post: {

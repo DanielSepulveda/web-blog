@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import { Formik, Form, Field } from 'formik'
 import classnames from 'classnames'
 import { SiteClient } from 'datocms-client'
+import TextField from 'components/shared/TextField'
 import schema from '../../lib/schemas/comment'
 
 const GET_POST_COMMENTS = `
@@ -21,7 +22,6 @@ const Comments = ({ postId }) => {
   const { data } = useSWR(GET_POST_COMMENTS, (query) => datoAPI(query, { variables: { id: postId } }))
 
   const handleSubmit = (values) => {
-    console.log(values)
     client.items
       .create({
         ...values,
@@ -68,25 +68,7 @@ const Comments = ({ postId }) => {
               <Form>
                 <div className="flex flex-col items-start">
                   <Field name="content">
-                    {({ field, meta }) => (
-                      <div className="w-full">
-                        <label
-                          className={classnames('block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2', {
-                            'border-red-500': Boolean(meta.touched && meta.error),
-                          })}
-                          htmlFor="content"
-                        >
-                          Add a comment
-                        </label>
-                        <input
-                          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="content"
-                          type="text"
-                          {...field}
-                        />
-                        {meta.touched && meta.error && <p className="text-red-500 text-xs italic mb-6">{meta.error}</p>}
-                      </div>
-                    )}
+                    {({ field, meta }) => <TextField field={field} meta={meta} label="Add a comment" name="content" />}
                   </Field>
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
