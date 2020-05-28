@@ -2,8 +2,17 @@ import React from 'react'
 import Link from 'next/link'
 import SearchIcon from 'public/static/svg/icon-search.svg'
 import Container from '../container'
+import { useCurrentUser } from '../../../lib/hooks'
 
 const Header = ({ openSearch }) => {
+  const [user, { mutate }] = useCurrentUser()
+  const handleLogout = async () => {
+    await fetch('/api/login', {
+      method: 'DELETE',
+    })
+    mutate(null)
+  }
+
   return (
     <header>
       <Container>
@@ -23,13 +32,41 @@ const Header = ({ openSearch }) => {
                     </Link>
                   </div>
                 </li>
-                <li>
-                  <div className="flex h-full justify-center items-center">
-                    <Link href="/login">
-                      <a className="hover:text-gray-700">Sign In</a>
-                    </Link>
-                  </div>
-                </li>
+                {!user ? (
+                  <>
+                    <li>
+                      <div className="flex h-full ml-12 flex justify-end">
+                        <Link href="/login">
+                          <a className="hover:text-gray-700">Sign in</a>
+                        </Link>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="flex h-full ml-12 flex justify-end">
+                        <Link href="/signup">
+                          <a className="hover:text-gray-700">Sign up</a>
+                        </Link>
+                      </div>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <div className="flex-initial ml-12 flex justify-end">
+                        <Link href="/user/[userId]" as={`/user/${user._id}`}>
+                          <a className="hover:text-gray-700">Profile</a>
+                        </Link>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="flex-initial ml-12 flex justify-end">
+                        <a tabIndex={0} role="button" onClick={handleLogout}>
+                          Logout
+                        </a>
+                      </div>
+                    </li>
+                  </>
+                )}
                 {/* <li className="ml-8">
                   <div className="flex h-full justify-center items-center">
                     <Link href="/">
