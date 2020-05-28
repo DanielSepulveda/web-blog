@@ -1,15 +1,20 @@
 import React from 'react'
 import Link from 'next/link'
 import SearchIcon from 'public/static/svg/icon-search.svg'
+import { useSnackbar } from 'notistack'
 import Container from '../container'
 import { useCurrentUser } from '../../../lib/hooks'
 
 const Header = ({ openSearch }) => {
   const [user, { mutate }] = useCurrentUser()
+  const { enqueueSnackbar } = useSnackbar()
+
   const handleLogout = async () => {
     await fetch('/api/login', {
       method: 'DELETE',
     })
+
+    enqueueSnackbar('Logout successful', { variant: 'success' })
     mutate(null)
   }
 

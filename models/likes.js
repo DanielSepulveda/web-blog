@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { v4 } from 'uuid'
 
 const schema = new mongoose.Schema({
   _id: {
@@ -10,7 +11,7 @@ const schema = new mongoose.Schema({
     required: [true, 'Please provide a post id'],
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
   },
 })

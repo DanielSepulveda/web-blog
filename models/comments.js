@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { v4 } from 'uuid'
 
 const schema = new mongoose.Schema({
   _id: {
@@ -7,10 +8,10 @@ const schema = new mongoose.Schema({
   },
   commentId: {
     type: String,
-    required: [true, 'Please provide'],
+    required: [true, 'Please provide a commentId'],
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
   },
 })

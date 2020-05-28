@@ -24,13 +24,13 @@ const schema = new mongoose.Schema({
   },
   likes: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: 'Like',
     },
   ],
   comments: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: 'Comment',
     },
   ],
