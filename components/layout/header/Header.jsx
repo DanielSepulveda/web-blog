@@ -1,15 +1,20 @@
 import React from 'react'
 import Link from 'next/link'
 import SearchIcon from 'public/static/svg/icon-search.svg'
+import { useSnackbar } from 'notistack'
 import Container from '../container'
 import { useCurrentUser } from '../../../lib/hooks'
 
 const Header = ({ openSearch }) => {
   const [user, { mutate }] = useCurrentUser()
+  const { enqueueSnackbar } = useSnackbar()
+
   const handleLogout = async () => {
     await fetch('/api/login', {
       method: 'DELETE',
     })
+
+    enqueueSnackbar('Logout successful', { variant: 'success' })
     mutate(null)
   }
 
@@ -32,6 +37,10 @@ const Header = ({ openSearch }) => {
                     </Link>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div className="flex-initial ml-12 flex justify-end">
+              <ul className="flex h-full text-xs font-bold tracking-wider uppercase">
                 {!user ? (
                   <>
                     <li>
@@ -67,17 +76,8 @@ const Header = ({ openSearch }) => {
                     </li>
                   </>
                 )}
-                {/* <li className="ml-8">
-                  <div className="flex h-full justify-center items-center">
-                    <Link href="/">
-                      <a className="hover:text-gray-700">About Us</a>
-                    </Link>
-                  </div>
-                </li> */}
               </ul>
-            </div>
-            <div className="flex-initial ml-12 flex justify-end">
-              <div className="cursor-pointer">
+              <div className="cursor-pointer ml-12">
                 <img src={SearchIcon} alt="Search Icon" onClick={openSearch} />
               </div>
             </div>

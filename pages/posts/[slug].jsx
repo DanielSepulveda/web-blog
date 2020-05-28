@@ -29,7 +29,7 @@ const Post = ({ post, morePosts }) => {
                 <title>{` Blogging - ${post.title}`}</title>
               </Head>
               <PostHeader title={post.title} coverImage={post.coverImage} date={post.date} author={post.author} />
-              <PostBody content={post.content} />
+              <PostBody content={post.content} postId={post.id} />
             </article>
             <hr className="border-accent-2 mt-28 mb-12" />
             <PostComments postId={post.id} />
@@ -116,8 +116,6 @@ const GET_POST_BY_SLUG = `
 export async function getStaticProps({ params }) {
   const data = await datoAPI(GET_POST_BY_SLUG, { variables: { slug: params.slug } })
   const content = await markdownToHtml(data?.post?.content || '')
-
-  console.log(data)
 
   return {
     props: {

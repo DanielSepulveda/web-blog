@@ -3,37 +3,37 @@ import Head from 'next/head'
 import Router from 'next/router'
 import Layout, { Container } from 'components/layout'
 import { useCurrentUser } from '../lib/hooks'
-import { Form, Formik, Field } from 'formik';
+import { Form, Formik, Field } from 'formik'
+import { useSnackbar } from 'notistack'
+import TextField from 'components/shared/TextField'
 import schema from '../lib/schemas/signup'
 
 const SignupPage = () => {
   const [user, { mutate }] = useCurrentUser()
-  const [errorMsg, setErrorMsg] = useState('')
+  const { enqueueSnackbar } = useSnackbar()
+
   useEffect(() => {
     if (user) Router.replace('/')
   }, [user])
 
-  const handleSubmit = async (values, formik) => {
+  const handleSubmit = async (values) => {
     try {
-			const body = {
-				email: values.email,
-				name: values.name,
-				lastname: values.lastname,
-				password: values.password,
-			}
-			const res = await fetch('/api/signup', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body),
-			})
-			if (res.status === 201) {
-				const userObj = await res.json()
-				mutate(userObj)
-			} else {
-				setErrorMsg(await res.text())
-			} 
-		} catch (e) {
-      console.log(e)
+      const { confirmPassword, ...restValues } = values
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(restValues),
+      })
+
+      if (!res.ok) throw new Error(await res.text())
+
+      const userObj = await res.json()
+
+      enqueueSnackbar('Signup successful', { variant: 'success' })
+
+      mutate(userObj)
+    } catch (e) {
+      enqueueSnackbar(e.message, { variant: 'error' })
     }
   }
 
@@ -44,88 +44,61 @@ const SignupPage = () => {
           <title>Sign up</title>
         </Head>
         <Container>
-          <h2>Sign up</h2>
-          <Formik
-            initialValues={{
-							name: '',
-							lastname: '',
-              email: '',
-							password: ''
-            }}
-            validationSchema={schema}
-            onSubmit={handleSubmit}
-          >
-            {({ touched, field, errors, isValid, isSubmitting }) => (
-              <Form noValidate>
-                {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
-								<div className="md:flex md:items-center mb-6">
-                  <Field
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="name"
-                    name="name"
-                    placeholder="Name"
-                    type="name"
-                  />
-                </div>
-                {errors.name && touched.name ? (
-                  <p>{errors.name}</p>
-                ) : null}
-								<div className="md:flex md:items-center mb-6">
-                  <Field
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="lastname"
-                    name="lastname"
-                    placeholder="Last Name"
-                    type="lastname"
-                  />
-                </div>
-                {errors.lastname && touched.lastname ? (
-                  <p>{errors.lastname}</p>
-                ) : null}
-                <div className="md:flex md:items-center mb-6">
-                  <Field
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    type="email"
-                  />
-                </div>
-                {errors.email && touched.email ? (
-                  <p>{errors.email}</p>
-                ) : null}
-                <div className="md:flex md:items-center mb-6">
-                  <Field
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                  />
-                </div>
-                {errors.password && touched.password ? (
-                  <div>{errors.password}</div>
-                ) : null}
-                <div className="flex justify-center">
-                  {isValid ? 
-                    <button 
-                      className="shadow bg-gray-800 hover:bg-gray-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
-                      type="submit"
-                    >
-                      Sign In
-                    </button> 
-                      : 
-                    <button 
-                      className="shadow bg-gray-400 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 cursor-not-allowed" 
-                      type="submit"
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center">
+            Sign up
+          </h1>
+          <div className="max-w-4xl mx-auto">
+            <Formik
+              initialValues={{
+                name: '',
+                lastname: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+              }}
+              validationSchema={schema}
+              onSubmit={handleSubmit}
+            >
+              {({ submitForm, isSubmitting }) => (
+                <Form>
+                  <Field name="name">
+                    {({ field, meta }) => <TextField field={field} meta={meta} label="Name" name="name" />}
+                  </Field>
+                  <Field name="lastname">
+                    {({ field, meta }) => <TextField field={field} meta={meta} label="Lastname" name="lastname" />}
+                  </Field>
+                  <Field name="email">
+                    {({ field, meta }) => <TextField field={field} meta={meta} label="Email" name="email" />}
+                  </Field>
+                  <Field name="password">
+                    {({ field, meta }) => (
+                      <TextField field={field} meta={meta} label="Password" name="password" type="password" />
+                    )}
+                  </Field>
+                  <Field name="confirmPassword">
+                    {({ field, meta }) => (
+                      <TextField
+                        field={field}
+                        meta={meta}
+                        label="Confirm Password"
+                        name="confirmPassword"
+                        type="password"
+                      />
+                    )}
+                  </Field>
+                  <div className="flex justify-center mt-8">
+                    <button
+                      className="shadow bg-gray-800 hover:bg-gray-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                      onClick={submitForm}
+                      disabled={isSubmitting}
                     >
                       Sign Up
                     </button>
-                  }
-                </div>
-              </Form>
-            )}
-          </Formik>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </Container>
       </Layout>
     </>
