@@ -11,7 +11,7 @@ import schema from '../../lib/schemas/comment'
 
 const GET_POST_COMMENTS = `
   query PostComments($id: ItemId) {
-    allComments(filter: { post: { eq: $id }, approved: {eq: "false" } }) {
+    allComments(filter: { post: { eq: $id }, approved: {eq: "true" } }) {
       id
       content
     }

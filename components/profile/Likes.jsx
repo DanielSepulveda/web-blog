@@ -37,19 +37,23 @@ const POST_QUERY = `
 `
 
 const Likes = ({ postId }) => {
-	//const data = await datoAPI(POST_QUERY, { variables: { id: params.postId } })
-	console.log(postId)
-	const { data } = useSWR(POST_QUERY, (query) => datoAPI(query, { variables: { id: postId } }))
-	console.log(data)
+  const [data, setData] = React.useState(null)
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const likeData = await datoAPI(POST_QUERY, { variables: { id: postId } })
+      setData(likeData)
+    }
+
+    fetchData()
+  }, [])
 
   if (!data) {
     return <div>Loading...</div>
   }
 
   const { post } = data
-  return (
-    <PostCard {...post}/>
-  )
+  return <PostCard {...post} />
 }
 
 export default Likes
