@@ -74,7 +74,7 @@ const formatPostsByCategory = (posts) => {
   return postsByCategory
 }
 
-const Home = ({ data }) => {
+const Page = ({ data }) => {
   const { allPosts } = data
 
   const postsByCategories = formatPostsByCategory(allPosts)
@@ -104,4 +104,4 @@ const Home = ({ data }) => {
   )
 }
 
-export default Home
+export default Page

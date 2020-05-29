@@ -9,7 +9,7 @@ import PostTitle from 'components/blog/PostTitle'
 import shortid from 'shortid'
 import { useRouter } from 'next/router'
 
-const Home = ({ category, heroPost, recentPosts, likedPosts }) => {
+const Page = ({ category, heroPost, recentPosts, likedPosts }) => {
   const router = useRouter()
   if (!router.isFallback && !category?.slug) {
     return <ErrorPage statusCode={404} />
@@ -64,7 +64,7 @@ const Home = ({ category, heroPost, recentPosts, likedPosts }) => {
   )
 }
 
-export default Home
+export default Page
 
 const GET_CATEGORY_BY_SLUG = `
   query CategoryBySlug($slug: String) {

@@ -40,7 +40,7 @@ const Header = ({ openSearch }) => {
                 </li>
                 <li className="ml-6">
                   <div className="flex h-full justify-center items-center">
-                    <Link href="/">
+                    <Link href="/about">
                       <a className="hover:text-gray-700">About Us</a>
                     </Link>
                   </div>
