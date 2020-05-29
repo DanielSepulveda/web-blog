@@ -74,10 +74,10 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000).
 
 
-### Authentication
+## Authentication
 We use a external service called Passport in SignUp and Login. It returns the session of the User to the client inside a cookie. On every request the passport middleware authenticates the user with the session cookie and populates the request with the user information if the User in Logged In.
 
-### API endpoints
+## API endpoints
  * login. Method: POST. Used to authenticate the User
  * signup. Method: POST. Used to register the User email and password in the database.
  * user. Method: GET. Used to get the current User logged in.
@@ -88,3 +88,8 @@ We use a external service called Passport in SignUp and Login. It returns the se
    * create. Method: POST. Used to create a Like and add it to the User
    * postLiked Method: POST. Used to know if a Post is liked by a User
    * remove Method: POST. Used to remove a Like of a User from a Post
+   
+## Authors
+
+#### Daniel Sepulveda
+#### Martin Ruiz
