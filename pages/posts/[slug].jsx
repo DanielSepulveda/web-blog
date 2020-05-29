@@ -96,6 +96,7 @@ const GET_POST_BY_SLUG = `
       categories {
         id
         name
+        slug
       }
       coverImage {
         responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
