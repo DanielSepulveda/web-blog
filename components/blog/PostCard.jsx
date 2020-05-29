@@ -1,33 +1,31 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Image } from 'react-datocms'
+import Link from 'next/link'
 import CardPill from './CardPill'
 
-const PostCard = ({ coverImage, title, excerpt, categories }) => {
+const PostCard = ({ coverImage, title, excerpt, categories = [], slug }) => {
   return (
-    <article className="px-2">
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
-        <Image data={coverImage.responsiveImage} />
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{title}</div>
-          <p className="text-gray-700 text-base">{excerpt}</p>
+    <div className="rounded overflow-hidden shadow-lg h-full flex flex-col">
+      <Link as={`/posts/${slug}`} href="/posts/[slug]">
+        <a aria-label={title}>
+          <Image data={coverImage.responsiveImage} className="transition duration-200 ease-in-out hover:opacity-75" />
+        </a>
+      </Link>
+      <div className="px-6 py-4 flex-1">
+        <div className="mb-2">
+          <Link as={`/posts/${slug}`} href="/posts/[slug]">
+            <a className="hover:underline font-bold text-2xl">{title}</a>
+          </Link>
         </div>
-        <div className="px-6 py-4">
-          {categories.map((category) => (
-            <CardPill key={category.id} {...category} />
-          ))}
-        </div>
+        <p className="text-gray-700 text-sm">{excerpt}</p>
       </div>
-    </article>
+      <div className="px-6 py-4">
+        {categories.map((category) => (
+          <CardPill key={category.id} {...category} />
+        ))}
+      </div>
+    </div>
   )
-}
-
-PostCard.propTypes = {
-  coverImage: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  excerpt: PropTypes.string.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default PostCard
