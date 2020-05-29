@@ -11,8 +11,7 @@ const handler = nextConnect()
 handler.use(middleware)
 
 handler.post(async (req, res) => {
-  const { name, lastname, password } = req.body
-  const email = normalizeEmail(req.body.email)
+  const { name, lastname, password, email } = req.body
 
   if (!isEmail(email)) {
     res.status(400).send('The email you entered is invalid.')

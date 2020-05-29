@@ -70,7 +70,7 @@ const Header = ({ openSearch }) => {
                   <>
                     <li>
                       <div className="flex-initial ml-12 flex justify-end">
-                        <Link href="/user/[userId]" as={`/user/${user._id}`}>
+                        <Link href="/profile" as={`/profile`}>
                           <a className="hover:text-gray-700">Profile</a>
                         </Link>
                       </div>
