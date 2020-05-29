@@ -37,6 +37,7 @@ const HOMEPAGE_QUERY = `
     categories {
       id
       name
+      slug
     }
     coverImage {
       responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
@@ -65,6 +66,7 @@ const HOMEPAGE_QUERY = `
     categories {
       id
       name
+      slug
     }
     coverImage {
       responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
@@ -93,6 +95,7 @@ const HOMEPAGE_QUERY = `
     categories {
       id
       name
+      slug
     }
     coverImage {
       responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
@@ -131,30 +134,34 @@ const Home = ({ data }) => {
       </Head>
       <Container>
         <HeroPost {...heroPost} />
-        <section className="mb-16">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
-            Recent Posts
-          </h1>
-          <div className="flex flex-wrap -mx-2 blogPosts-container">
-            {recentPosts.map((blogPost) => (
-              <article className="px-2 w-1/3" key={blogPost.id}>
-                <PostCard {...blogPost} />
-              </article>
-            ))}
-          </div>
-        </section>
-        <section>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
-            Most Liked Posts
-          </h1>
-          <div className="flex flex-wrap -mx-2 blogPosts-container">
-            {likedPosts.map((blogPost) => (
-              <article className="px-2 w-1/3" key={blogPost.id}>
-                <PostCard {...blogPost} />
-              </article>
-            ))}
-          </div>
-        </section>
+        {recentPosts.length > 0 && (
+          <section className="mb-16">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+              More Posts
+            </h1>
+            <div className="flex flex-wrap -mx-2 blogPosts-container">
+              {recentPosts.map((blogPost) => (
+                <article className="px-2 w-1/3" key={blogPost.id}>
+                  <PostCard {...blogPost} />
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+        {likedPosts.length > 0 && (
+          <section>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+              Most Liked Posts
+            </h1>
+            <div className="flex flex-wrap -mx-2 blogPosts-container">
+              {likedPosts.map((blogPost) => (
+                <article className="px-2 w-1/3" key={blogPost.id}>
+                  <PostCard {...blogPost} />
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
       </Container>
     </Layout>
   )

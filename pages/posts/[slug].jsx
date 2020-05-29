@@ -59,6 +59,7 @@ const GET_POST_BY_SLUG = `
       categories {
         id
         name
+        slug
       }
       author {
         name

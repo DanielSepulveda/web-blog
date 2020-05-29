@@ -25,8 +25,9 @@ const Header = ({ openSearch }) => {
           <div className="flex h-24 items-center border-b border-black">
             <div className="flex-initial mr-12">
               <Link href="/">
-                <a className="text-2xl tracking-wider font-thin uppercase">Blogging.</a>
+                <a className="text-2xl tracking-wider font-thin uppercase hover:underline">Blogging</a>
               </Link>
+              .
             </div>
             <div className="flex-1">
               <ul className="flex h-full text-xs font-bold tracking-wider uppercase">

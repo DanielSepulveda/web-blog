@@ -21,6 +21,7 @@ const HOMEPAGE_QUERY = `
     categories {
       id
       name
+      slug
     }
     coverImage {
       responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
@@ -75,8 +76,6 @@ const formatPostsByCategory = (posts) => {
 
 const Home = ({ data }) => {
   const { allPosts } = data
-
-  console.log(allPosts)
 
   const postsByCategories = formatPostsByCategory(allPosts)
 

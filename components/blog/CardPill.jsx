@@ -1,9 +1,13 @@
 import React from 'react'
+import Link from 'next/link'
 
-const CardPill = ({ name }) => {
+const CardPill = ({ name, slug }) => {
   return (
     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-      {`#${name}`}
+      #
+      <Link href={`/topics/${slug}`}>
+        <a className="hover:underline">{name}</a>
+      </Link>
     </span>
   )
 }
