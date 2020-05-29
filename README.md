@@ -1,8 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+## About this project
+This Web App is a shared Blog intended for persons to share their knowledge and ideas. Using Next.js, a React framework used to create SSG and SSR pages. DatoCMS for managing the web app content, images and comments. Algolia for creating a application search engine experience for the users. And Amazon Lambda for conecting DatoCMS with Algolia indexes.
+
+## Tools used
+* **Passport**
+
+Authentication services
+
+* **Formik**
+
+React forms
+
+* **Yup**
+
+Validation schema
+
+* **Mongoose**
+
+Connection to MongoDB and models
+
+* **DatoCMS**
+
+Content MAnagment Service
+
+* **Algolia**
+
+Application Search Engine
+
+* **bcryptjs**
+
+Encryption service
+
+* **notistack**
+
+Application notification service
+
+* **swr**
+
+Application fetch service
+
+* **shortid**
+
+Unique Id client generator
+
+* **remark**
+
+Markdown processor
+
+* **tailwindcss**
+
+CSS library
+
+* **uuid**
+
+Unique Id generator
+
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+```bash
+npm install
+# or
+yarn 
+```
+Then run the development server:
 
 ```bash
 npm run dev
@@ -10,21 +71,20 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+### Authentication
+We use a external service called Passport in SignUp and Login. It returns the session of the User to the client inside a cookie. On every request the passport middleware authenticates the user with the session cookie and populates the request with the user information if the User in Logged In.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on ZEIT Now
-
-The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](https://zeit.co/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### API endpoints
+ * login. Method: POST. Used to authenticate the User
+ * signup. Method: POST. Used to register the User email and password in the database.
+ * user. Method: GET. Used to get the current User logged in.
+ * userInfo. Method: GET. Used to extract the info of the User in DatoCMS.
+ * comments
+   * create. Method: POST. Used to create a new comment and add it to the User.
+ * likes
+   * create. Method: POST. Used to create a Like and add it to the User
+   * postLiked Method: POST. Used to know if a Post is liked by a User
+   * remove Method: POST. Used to remove a Like of a User from a Post
