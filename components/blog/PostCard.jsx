@@ -5,19 +5,19 @@ import CardPill from './CardPill'
 
 const PostCard = ({ coverImage, title, excerpt, categories = [], slug }) => {
   return (
-    <div className="rounded overflow-hidden shadow-lg">
+    <div className="rounded overflow-hidden shadow-lg h-full flex flex-col">
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a aria-label={title}>
           <Image data={coverImage.responsiveImage} className="transition duration-200 ease-in-out hover:opacity-75" />
         </a>
       </Link>
-      <div className="px-6 py-4">
+      <div className="px-6 py-4 flex-1">
         <div className="mb-2">
           <Link as={`/posts/${slug}`} href="/posts/[slug]">
             <a className="hover:underline font-bold text-2xl">{title}</a>
           </Link>
         </div>
-        <p className="text-gray-700 text-sm h-24">{excerpt}</p>
+        <p className="text-gray-700 text-sm">{excerpt}</p>
       </div>
       <div className="px-6 py-4">
         {categories.map((category) => (
