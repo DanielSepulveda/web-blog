@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Layout, { Container } from 'components/layout'
 import PostCard from 'components/blog/PostCard'
 import HeroPost from 'components/blog/HeroPost'
+import PostTitle from 'components/blog/PostTitle'
 import shortid from 'shortid'
 import { useRouter } from 'next/router'
 
@@ -191,7 +192,6 @@ const GET_STATIC_PATHS = `
 
 export async function getStaticPaths() {
   const { allCategories } = await datoAPI(GET_STATIC_PATHS)
-  console.log(allCategories)
   return {
     paths:
       allCategories?.map(({ slug }) => ({
