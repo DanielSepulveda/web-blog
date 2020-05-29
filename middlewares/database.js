@@ -25,25 +25,3 @@ const database = async (req, res, next) => {
 
 export default database
 export { dbConnect }
-// const connection = {}
-
-// const dbConnect = async () => {
-//   if (connection.isConnected) {
-//     return
-//   }
-
-//   await mongoose.connect(process.env.MONGO_DB_URL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-
-//   console.log(mongoose)
-//   console.log('==========')
-//   console.log(mongoose.connection)
-//   console.log('==========')
-//   console.log(mongoose.db)
-
-//   connection.isConnected = 1
-// }
-
-// export default dbConnect

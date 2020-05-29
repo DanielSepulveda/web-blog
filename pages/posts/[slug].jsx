@@ -17,6 +17,7 @@ const Post = ({ post, morePosts }) => {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
   return (
     <Layout>
       <Container>
@@ -29,7 +30,7 @@ const Post = ({ post, morePosts }) => {
                 <title>{` Blogging - ${post.title}`}</title>
               </Head>
               <PostHeader title={post.title} coverImage={post.coverImage} date={post.date} author={post.author} />
-              <PostBody content={post.content} postId={post.id} />
+              <PostBody content={post.content} postId={post.id} likes={post.likes} />
             </article>
             <hr className="border-accent-2 mt-28 mb-12" />
             <PostComments postId={post.id} />
@@ -89,12 +90,12 @@ const GET_POST_BY_SLUG = `
       excerpt
       date
       author {
-      name
-    }
-    categories {
-      id
-      name
-    }
+        name
+      }
+      categories {
+        id
+        name
+      }
       coverImage {
         responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
         srcSet
