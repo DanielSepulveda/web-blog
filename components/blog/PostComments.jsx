@@ -18,7 +18,7 @@ const GET_POST_COMMENTS = `
   }
 `
 
-const client = new SiteClient('5ec478748b94d8f65d051ae6195144')
+const client = new SiteClient(process.env.SITE_CLIENT)
 
 const Comments = ({ postId }) => {
   const { data } = useSWR(GET_POST_COMMENTS, (query) => datoAPI(query, { variables: { id: postId } }))

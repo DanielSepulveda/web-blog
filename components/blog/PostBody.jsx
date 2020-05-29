@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack'
 import { SiteClient } from 'datocms-client'
 import useSWR from 'swr'
 
-const client = new SiteClient('5ec478748b94d8f65d051ae6195144')
+const client = new SiteClient(process.env.SITE_CLIENT)
 
 const PostBody = ({ content, postId, likes }) => {
   const [user, { mutate }] = useCurrentUser()
