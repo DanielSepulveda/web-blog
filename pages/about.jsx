@@ -46,6 +46,20 @@ const Page = ({ data }) => {
                 Vitau
               </a>
             </div>
+              <p className="text-base mb-2">
+                Software Engineer/Front-End Developer with experience in React.js, Python, C++ and Data Mining. Currently working at{' '}
+                <a className="text-blue-400 hover:underline" href="https://vitau.mx/" target="_blank" rel="noopener">
+                  Vitau
+                </a>{' '}
+                building the e-commerce administrator panel
+              </p>
+              <p className="text-base">
+                Computer science major from{' '}
+                <a className="text-blue-400 hover:underline" href="https://tec.mx/es" target="_blank" rel="noopener">
+                  Tec
+                </a>{' '}
+                currently cursing my 7'th semester
+              </p>
             <div className="text-base"></div>
           </div>
           <div className="flex items-center flex-col">
