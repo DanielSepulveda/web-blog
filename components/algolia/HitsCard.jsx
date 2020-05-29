@@ -12,6 +12,7 @@ query Post($id: ItemId) {
     categories {
       id
       name
+      slug
     }
     coverImage {
       responsiveImage(imgixParams: { fit: crop, w: 150, h: 150, auto: format }) {

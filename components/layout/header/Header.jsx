@@ -25,12 +25,20 @@ const Header = ({ openSearch }) => {
           <div className="flex h-24 items-center border-b border-black">
             <div className="flex-initial mr-12">
               <Link href="/">
-                <a className="text-2xl tracking-wider font-thin uppercase">Blogging.</a>
+                <a className="text-2xl tracking-wider font-thin uppercase hover:underline">Blogging</a>
               </Link>
+              .
             </div>
             <div className="flex-1">
               <ul className="flex h-full text-xs font-bold tracking-wider uppercase">
                 <li>
+                  <div className="flex h-full justify-center items-center">
+                    <Link href="/topics">
+                      <a className="hover:text-gray-700">Topics</a>
+                    </Link>
+                  </div>
+                </li>
+                <li className="ml-6">
                   <div className="flex h-full justify-center items-center">
                     <Link href="/">
                       <a className="hover:text-gray-700">About Us</a>

@@ -4,9 +4,10 @@ import { renderMetaTags } from 'react-datocms'
 import Head from 'next/head'
 import Layout, { Container } from 'components/layout'
 import PostCard from 'components/blog/PostCard'
+import HeroPost from 'components/blog/HeroPost'
 
 const HOMEPAGE_QUERY = `
-query HomePage($limit: IntType) {
+{
   site: _site {
     favicon: faviconMetaTags {
       attributes
@@ -21,7 +22,39 @@ query HomePage($limit: IntType) {
       tag
     }
   }
-  allPosts(first: $limit) {
+  heroPost: post(orderBy: _createdAt_DESC) {
+    id
+    title
+    excerpt
+    date
+    slug
+    author {
+        name
+        picture {
+          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100})
+        }
+      }
+    categories {
+      id
+      name
+      slug
+    }
+    coverImage {
+      responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+  }
+  recentPosts: allPosts(skip: "1", first: "5", orderBy: _createdAt_DESC) {
     id
     title
     excerpt
@@ -33,6 +66,36 @@ query HomePage($limit: IntType) {
     categories {
       id
       name
+      slug
+    }
+    coverImage {
+      responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+  }
+  likedPosts: allPosts(first: "5", orderBy: likes_DESC, filter: {likes: {gt: "0"}}) {
+    id
+    title
+    excerpt
+    date
+    slug
+    author {
+      name
+    }
+    categories {
+      id
+      name
+      slug
     }
     coverImage {
       responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
@@ -52,9 +115,7 @@ query HomePage($limit: IntType) {
 }`
 
 export async function getStaticProps() {
-  const data = await datoAPI(HOMEPAGE_QUERY, {
-    variables: { limit: 10 },
-  })
+  const data = await datoAPI(HOMEPAGE_QUERY)
   return {
     props: {
       data,
@@ -63,7 +124,8 @@ export async function getStaticProps() {
 }
 
 const Home = ({ data }) => {
-  const { allPosts } = data
+  const { recentPosts, heroPost, likedPosts } = data
+
   return (
     <Layout>
       <Head>
@@ -71,13 +133,35 @@ const Home = ({ data }) => {
         <title>Blogging - Home</title>
       </Head>
       <Container>
-        <div className="flex flex-wrap -mx-2 blogPosts-container">
-          {allPosts.map((blogPost) => (
-            <article className="px-2 w-1/3" key={blogPost.id}>
-              <PostCard {...blogPost} />
-            </article>
-          ))}
-        </div>
+        <HeroPost {...heroPost} />
+        {recentPosts.length > 0 && (
+          <section className="mb-16">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+              More Posts
+            </h1>
+            <div className="flex flex-wrap -mx-2 blogPosts-container">
+              {recentPosts.map((blogPost) => (
+                <article className="px-2 w-1/3" key={blogPost.id}>
+                  <PostCard {...blogPost} />
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+        {likedPosts.length > 0 && (
+          <section>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+              Most Liked Posts
+            </h1>
+            <div className="flex flex-wrap -mx-2 blogPosts-container">
+              {likedPosts.map((blogPost) => (
+                <article className="px-2 w-1/3" key={blogPost.id}>
+                  <PostCard {...blogPost} />
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
       </Container>
     </Layout>
   )
