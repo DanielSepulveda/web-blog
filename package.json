@@ -28,7 +28,7 @@
     "graphql-request": "^1.8.2",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-svgo": "^7.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mongoose": "^5.9.16",
     "next": "^9.4.0",
     "next-absolute-url": "^1.2.2",
