@@ -47,7 +47,7 @@
     "react-dom": "16.13.1",
     "react-instantsearch-dom": "^6.5.0",
     "remark": "^12.0.0",
-    "remark-html": "^11.0.2",
+    "remark-html": "^13.0.2",
     "shortid": "^2.2.15",
     "swr": "^0.2.0",
     "uuid": "^8.1.0",
