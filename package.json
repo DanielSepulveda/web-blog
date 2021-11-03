@@ -51,7 +51,7 @@
     "shortid": "^2.2.15",
     "swr": "^0.2.0",
     "uuid": "^8.1.0",
-    "validator": "^13.0.0",
+    "validator": "^13.7.0",
     "yup": "^0.29.0"
   },
   "devDependencies": {
